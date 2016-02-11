@@ -1,0 +1,59 @@
+/* TENKORANG DARKO - DATABASE MANAGEMENT CLASS. 
+--------------------------------
+LAB 3 - UPDATED WITH COMMENTS and ";"
+
+at the end of each query */
+
+
+-- #1 LIST THE ORDER NUMBER AND TOTAL DOLLARS OF ALL ORDERS.
+	SELECT ordnum, totalUSD
+	FROM Orders;
+
+-- #2 LIST THE NAME AND CITY OF AGENTS NAMED SMITH
+	SELECT name, city
+	FROM Agents
+	WHERE name = 'Smith';
+
+
+-- #3 LIST THE ID, NAME, AND PRICEUSD OF PRODUCTS WITH QUANTITY MORE THAN 208,000.
+	SELECT pid, name, priceUSD
+	FROM Products
+	WHERE quantity > 208000; 
+
+
+-- #4 LIST THE NAMES AND CITIES OF CUSTOMERS IN DALLAS
+	SELECT name, city 
+	FROM Customers 
+	WHERE city = 'Dallas';
+
+
+-- #5 LIST THE NAMES AND CITIES OF AGENTS NOT IN NEW YORK AND NOT IN TOKYO
+	SELECT name, city 
+	FROM Agents 
+	WHERE city <> 'New York' 
+	AND city <> 'Tokyo';
+
+-- #6 LIST ALL DATA FOR PRODUCTS NOT IN DALLAS OR DULUTH THAT COST US$1 OR MORE
+	SELECT *
+	FROM Products
+	WHERE city <> 'Dallas'
+	AND
+	city <> 'Duluth'
+	AND priceUSD >= 1;
+
+-- #7 LIST ALL DATA FOR ORDERS IN JANUARY OR MARCH
+	SELECT * 
+	FROM Orders 
+	WHERE mon = 'jan' 
+	OR mon = 'Mar'; 
+
+-- #8 LIST ALL DATA FOR ORDERS IN FEBRUARY LESS THAN US$500
+	SELECT * 
+	FROM Orders 
+	WHERE mon = 'feb' 
+	AND totalUSD < 500;
+
+-- #9 LIST ALL ORDERS FROM THE CUSTOMER WHOSE CID IS C005
+	SELECT * 
+	FROM Orders 
+	WHERE cid='C005'; 
