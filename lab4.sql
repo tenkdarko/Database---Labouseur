@@ -23,7 +23,7 @@ WHERE Orders.aid IN(
 		Select cid 
 		FROM Customers
 		Where city = 'Dallas')
-) ORDER BY Orders.pid;
+) ORDER BY Orders.pid DESC;
 
 
 -- 3. Get the ids and names of customers who did not place an order through agent a01.
@@ -46,6 +46,16 @@ WHERE Orders.pid = 'p01' AND CID IN(
 
 /* 5. Get the ids of products not ordered by any customers who placed any order through agent a07 in 
 pid order from highest to lowest. */
+SELECT Orders.pid
+FROM Orders
+WHERE Orders.pid NOT IN (
+	Select DISTINCT Orders.pid
+	FROM Orders
+	WHERE Orders.cid IN (
+		SELECT Orders.cid
+		FROM Orders
+		WHERE Orders.aid = 'a01')
+) ORDER BY Orders.pid DESC; 
 
 
 /* 6. Get the name, discounts, and city for all customers who place orders through agents in London or 
@@ -111,5 +121,4 @@ a Check contraint. This is a bad way to use it.
 */
 
 	
-
 
