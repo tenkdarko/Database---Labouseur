@@ -5,11 +5,10 @@ CREATE TABLE IF NOT EXISTS user_account(
 	PRIMARY KEY (user_id)
 );
 
+-- User Account Insert
 INSERT INTO user_account(f_name, l_name)
-VALUES('user', 'one');
-
-INSERT INTO user_account(f_name, l_name)
-VALUES('user', 'two');
+VALUES('user', 'one'), ('user', 'two'), ('user', 'three'), ('user', 'four'), ('user', 'five')
+, ('user', 'six'), ('user', 'seven'), ('user', 'eight'), ('user', 'nine'), ('user', 'ten');
 
 --SELECT * FROM user_account;
 
@@ -22,11 +21,10 @@ CREATE TABLE IF NOT EXISTS Profiles(
 	FOREIGN KEY (user_id) REFERENCES user_account(user_id)
 );
 
+-- Insert into Profiles
 INSERT INTO Profiles(user_id, bio)
-VALUES (1, 'new user!');
-
-INSERT INTO Profiles(user_id, bio)
-VALUES (2, 'The second user of the best social network ever');
+VALUES (1, 'new user!'),(2,'second user'),(3,'third user'),(4,'fourth user'),(5,'fith user'),(6,'six user'),
+(7,'seventh user'),(8,'eigth user'),(9,'ninth user'),(10,'tenth user');
 
 
 CREATE TABLE IF NOT EXISTS contacts(
@@ -40,8 +38,18 @@ CREATE TABLE IF NOT EXISTS contacts(
 	FOREIGN KEY (user_id) REFERENCES user_account(user_id)
 );
 
-INSERT INTO contacts(user_id, added_on, email_address)
-VALUES(1, '4/4/2016', 'email1@email.net');
+-- Insert into contacts
+INSERT INTO contacts(user_id, added_on, email_address, phone_num, Other_details)
+VALUES(1, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas'),
+(2, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas'),
+(3, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas'),
+(4, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas'),
+(5, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas'),
+(6, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas'),
+(7, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas'),
+(8, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas'),
+(9, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas'),
+(10, '4/4/2016', 'email1@email.net', 'xxxxxxxxxx', 'asdasdasdasdas');
 
 
 CREATE TABLE IF NOT EXISTS user_messages(
@@ -49,12 +57,22 @@ CREATE TABLE IF NOT EXISTS user_messages(
 	Contact_id INTEGER NOT NULL,
 	msg_date DATE NOT NULL,
 	Msg_text VARCHAR(500) NOT NULL,
-	PRIMARY KEY(user_id, contact_id, msg_date)
-	FOREIGN KEY user_id REFERENCES user_account(user_id)
+	PRIMARY KEY(user_id, contact_id, msg_date),
+	FOREIGN KEY (user_id) REFERENCES user_account(user_id)
 );
 
+-- Insert into user_messages
 INSERT INTO user_messages(user_id, contact_id, msg_date, msg_text)
-VALUES (1, 1, '4/4/2016', 'first-message');
+VALUES (1, 10, '4/4/2016', 'first-message'),
+(2, 9, '4/4/2016', 'hello-message'),
+(3, 8, '4/4/2016', 'hmmm-message'),
+(4, 7, '4/4/2016', 'wow-message'),
+(5, 6, '4/4/2016', 'name-message'),
+(6, 5, '4/4/2016', 'place-message'),
+(7, 4, '4/4/2016', 'yo-message'),
+(8, 3, '4/4/2016', 'second-message'),
+(9, 2, '4/4/2016', 'ayyyy-message'),
+(10, 1, '4/4/2016', 'thirdd-message');
 
 CREATE TABLE IF NOT EXISTS Location(
 	loc_id SERIAL NOT NULL UNIQUE,
@@ -62,8 +80,9 @@ CREATE TABLE IF NOT EXISTS Location(
 	PRIMARY KEY (loc_id)
 );
 
+--Insert Into location
 INSERT INTO location(place_name)
-VALUES ('Marist');
+VALUES ('Marist'),('Vassar'),('Yale'),('Princeton'),('Dartmouth');
 
 CREATE TABLE checked_in(
 	user_id INTEGER NOT NULL,
@@ -73,8 +92,9 @@ CREATE TABLE checked_in(
 	FOREIGN KEY (loc_id) REFERENCES location(loc_id)
 );
 
-INSERT INTO checked_in (user_id, loc_id)
-VALUES (1, 1);
+--Insert into checked_in
+INSERT INTO checked_in(user_id, loc_id)
+VALUES (1,2),(5,2),(6,3),(9,3),(6,1),(2,4),(10,5);
 
 CREATE TABLE IF NOT EXISTS  Videos(
 	Video_id SERIAL NOT NULL UNIQUE,
@@ -87,8 +107,18 @@ CREATE TABLE IF NOT EXISTS  Videos(
 	FOREIGN KEY (user_id) REFERENCES user_account(user_id)
 );
 
-INSERT INTO videos(user_id, playing_time, video_format, video_desc)
-VALUES (1, 100, 'mp4', 'Tom and Jerry');
+-- Insert into videos
+INSERT INTO videos(user_id, playing_time, video_format, video_desc, Video_date)
+VALUES (1, 100, 'mp4', 'Tom and Jerry','4-9-2016'),
+(2, 100, 'mp4', 'Hello video','4-9-2016'),
+(3, 100, 'mp4', 'Driving around','4-9-2016'),
+(4, 100, 'mp4', 'Visiting the family','4-9-2016'),
+(5, 100, 'mp4', 'Going to the hospital','4-9-2016'),
+(6, 100, 'mp4', 'Eating an orange','4-9-2016'),
+(7, 100, 'mp4', 'Walking to class','4-9-2016'),
+(8, 100, 'mp4', 'Counting money','4-9-2016'),
+(9, 100, 'mp4', 'Going outside','4-9-2016'),
+(10, 100, 'mp4', 'Opening my present','4-9-2016');
 
 CREATE TABLE IF NOT EXISTS Music(
 	Music_id SERIAL NOT NULL UNIQUE,
@@ -101,8 +131,18 @@ CREATE TABLE IF NOT EXISTS Music(
 	FOREIGN KEY (user_id) REFERENCES user_account(user_id)
 );
 
-INSERT INTO music(user_id, artist_name, track_name, track_format)
-VALUES (1, 'Flatbush Zombies', 'Palm Trees', 'mp3');
+-- Insert into music
+INSERT INTO music(user_id, artist_name, track_name, track_format,rating)
+VALUES (1, 'Flatbush Zombies', 'Palm Trees', 'mp3', 5),
+(2, 'killer Zombies', 'Palm Trees', 'mp3', 5),
+(3, 'nice Zombies', 'Palm Trees', 'mp3', 5),
+(4, 'lazy Zombies', 'Palm Trees', 'mp3', 5),
+(5, 'crazy Zombies', 'Palm Trees', 'mp3', 5),
+(6, 'happy Zombies', 'Palm Trees', 'mp3', 5),
+(7, 'angry Zombies', 'Palm Trees', 'mp3', 5),
+(8, 'bored Zombies', 'Palm Trees', 'mp3', 5),
+(9, 'exicited Zombies', 'Palm Trees', 'mp3', 5),
+(10, 'scared Zombies', 'Palm Trees', 'mp3', 5);
 
 CREATE TABLE IF NOT EXISTS Photos(
 	Photo_id SERIAL NOT NULL UNIQUE,
@@ -114,8 +154,18 @@ CREATE TABLE IF NOT EXISTS Photos(
 	FOREIGN KEY (user_id) REFERENCES user_account(user_id)
 );
 
+-- Insert into photos
 INSERT INTO photos(user_id, photo_title, photo_filename, photo_date)
-VALUES (1, 'phototitle1', 'phototitle1.jpg', '10/10/2014');
+VALUES (1, 'phototitle1', 'phototitle1.jpg', '10/10/2014'),
+(2, 'dog', 'dog.jpg', '10/10/2014'),
+(3, 'cat', 'cat.jpg', '10/10/2014'),
+(4, 'tree', 'tree.jpg', '10/10/2014'),
+(5, 'ocean', 'ocean.jpg', '10/10/2014'),
+(6, 'me', 'me.jpg', '10/10/2014'),
+(7, 'laptop', 'laptop.jpg', '10/10/2014'),
+(8, 'class', 'class.jpg', '10/10/2014'),
+(9, 'orange', 'orange.jpg', '10/10/2014'),
+(10, 'mom', 'mom.jpg', '10/10/2014');
 
 
 CREATE TABLE Profile_photos(
@@ -126,8 +176,9 @@ CREATE TABLE Profile_photos(
 	FOREIGN KEY (photo_id) REFERENCES photos(photo_id)
 );
 
+--Insert into profile_photos
 INSERT INTO Profile_photos(profile_id, photo_id)
-VALUES (1, 1);
+VALUES (1, 1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,8),(10,10);
 
 CREATE TABLE IF NOT EXISTS favorites(
 	Fav_id SERIAL NOT NULL UNIQUE,
@@ -142,14 +193,15 @@ CREATE TABLE IF NOT EXISTS favorites(
 	FOREIGN KEY (music_id) REFERENCES music(music_id)
 );
 
+-- Insert favorites into media
 INSERT INTO favorites(profile_id, photo_id)
-VALUES (1,1);
+VALUES (1,10),(2,9),(3,8),(4,7),(5,6),(6,5),(7,4),(8,3),(9,2),(10,1);
 
 INSERT INTO favorites(profile_id, music_id)
-VALUES (1,1);
+VALUES (1,10),(2,9),(3,8),(4,7),(5,6),(6,5),(7,4),(8,3),(9,2),(10,1);
 
 INSERT INTO favorites(profile_id, video_id)
-VALUES (1,1);
+VALUES (1,10),(2,9),(3,8),(4,7),(5,6),(6,5),(7,4),(8,3),(9,2),(10,1);
 
 CREATE TABLE IF NOT EXISTS Notifications(
 	Notification_id SERIAL NOT NULL UNIQUE,
@@ -159,6 +211,11 @@ CREATE TABLE IF NOT EXISTS Notifications(
 	PRIMARY KEY (Notification_id),
 	FOREIGN KEY (User_id) REFERENCES user_account(user_id)
 );
+
+
+--DROP FUNCTION videoNotification();
+--DROP FUNCTION photoNotification();
+--DROP FUNCTION musicNotification();
 
 
 --Takes video id and profile id as parameters, and adds the corresponding information to the notifications table
@@ -285,19 +342,23 @@ FOR EACH ROW EXECUTE PROCEDURE notify();
 INSERT INTO favorites(profile_id, music_id)
 VALUES(1,1);
 
+--SELECT * FROM favorites;
+
+--SELECT * FROM notifications;
+
 
 --admin user
-CREATE ROLE admin;
+CREATE ROLE admin_user;
 GRANT ALL ON ALL TABLES
 IN SCHEMA PUBLIC
-TO admin;
+TO admin_user;
 
 --social network user, cannot insert new users or profiles, but can access other tables
-CREATE ROLE user;
+CREATE ROLE regular_user;
 GRANT SELECT, INSERT, UPDATE ON location, user_messages, profile_photos, favorites, photos, videos, music, contacts, checked_in
-TO user;
-GRANT SELECT, UPDATE ON users, profiles
-TO user;
+TO regular_user;
+GRANT SELECT, UPDATE ON user_account, profiles
+TO regular_user;
 
 --Show all user checkins
 CREATE VIEW userCheckins AS
