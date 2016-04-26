@@ -340,8 +340,13 @@ CREATE TRIGGER notifcation AFTER INSERT OR UPDATE ON favorites
 FOR EACH ROW EXECUTE PROCEDURE notify();
 
 INSERT INTO favorites(profile_id, music_id)
-VALUES(1,1);
+VALUES(1,1),(1,2),(1,3);
 
+INSERT INTO favorites(profile_id, video_id)
+VALUES(1,1),(1,2),(1,3);
+
+INSERT INTO favorites(profile_id,  photo_id)
+VALUES(1,1),(1,2),(1,3);
 --SELECT * FROM favorites;
 
 --SELECT * FROM notifications;
